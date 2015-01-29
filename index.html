@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Chapter 0   Tutorials &mdash; Tutorials</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="../../../JSAV/css/JSAV.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/odsaMOD-min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/odsaStyle.css" type="text/css" />
+    
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": {
+        scale: "80"
+      }
+    });
+  </script>
+    <link rel="index" title="Tutorials" href="#" />
+    <link rel="next" title="1. Command Line Basics" href="cmdline.html" /> 
+  <style>
+ul li {
+	background: none;
+	list-style-type: none;
+}
+</style>
+</head>
+  <body>
+
+      <div class="header">
+        
+  
+      <script type="text/javascript" src="../../../lib/jquery.min.js"></script>
+      <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../JSAV/lib/jquery.transit.js"></script>
+    <script type="text/javascript" src="../../../JSAV/lib/raphael.js"></script>
+    <script type="text/javascript" src="../../../JSAV/build/JSAV-min.js"></script>
+    <script type="text/javascript" src="_static/config.js"></script>
+    <script type="text/javascript" src="../../../lib/odsaUtils-min.js"></script>
+    <script type="text/javascript" src="../../../lib/odsaMOD-min.js"></script>
+    <script type="text/javascript" src="../../../lib/conceptMap.js"></script>
+
+        
+<a id="username-link" style="float:right;color:red;margin:10px 20px auto; display: none" class="username-link" href="Gradebook.html"></a>
+<a id="login-link" style="float:right;color:red;margin:10px 20px auto" class="login-link" href="#"><Macro 'login'></a>
+<div id="login-box" class="login-popup">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+  <form method="post" class="signin" action="https://#">
+    <fieldset class="textbox">
+      <label class="username">
+        <span>Username</span>
+        <input id="username" value="" type="text" autocomplete="on" placeholder="Username" tabindex="1">
+      </label>
+      <label class="password">
+        <span>Password</span>
+        <input id="password" value="" type="password" placeholder="Password" tabindex="2">
+        <span><a id="forgot" href="#">Forgot your password?</a></span>
+      </label>
+
+      <p>
+        <input type="submit" id="login-submit-button" value="Sign in" tabindex="3" />
+      </p>
+      <p>
+        <input type="button" id="register-button" value="Register" tabindex="4" />
+      </p>
+    </fieldset>
+  </form>
+</div>
+
+        
+<a id="registration-link" style="float:right;color:red;margin:10px 20px auto" class="registration-link" href="#">Register</a>
+<div id="registration-box" class="registration-popup ">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close Window" /></a>
+  <form method="post" class="signin" action="https://#">
+    <fieldset class="textbox">
+      <div id="register_error" class="error"></div>
+      <label class="username">
+        <span>Username:</span>
+        <input type="text" id="user" placeholder="Username" />
+      </label>
+
+      <label class="password">
+        <span>Password</span>
+        <input id="pass" type="password" placeholder="Password" />
+      </label>
+
+      <label class="password">
+        <span>Confirm Password</span>
+        <input id="rpass" type="password" placeholder="Confirm Password" />
+      </label>
+
+      <label class="email">
+        <span>Email:</span>
+        <input type="text" id="email" placeholder="Email">
+      </label>
+
+      <p>
+        <input type="submit" id="register-submit-button" value="Register &rarr;"/>
+      </p>
+    </fieldset>
+  </form>
+</div>
+
+        
+<a id="bugreport-link" style="float:right;color:red;margin:10px 20px auto" class="bugreport-link" href="#">Report a bug</a>
+<div id="bugreport-box" class="bugreport-popup ">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close Window" /></a>
+  <form method="post" class="report" action="https://#">
+    <fieldset class="textbox">
+      <div id="bug_error" class="error"></div>
+      <label>
+        <span>Summary*:</span>
+        <input type="text" id="b_title" placeholder="Summary" />
+      </label>
+
+      <label class="os">
+        <span>Operating system*:</span>
+        <select id="b_os">
+          <option value="windows">Windows</option>
+          <option value="macos">Mac OS</option>
+          <option value="linux">Linux</option>
+          <option value="ios">iOS</option>
+          <option value="android">Android</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label class="browser">
+        <span>Browser*:</span>
+        <select id="b_browser">
+          <option value="chrome">Chrome</option>
+          <option value="safari">Safari</option>
+          <option value="internetexplorer">Internet Explorer</option>
+          <option value="opera">Opera</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label class="description">
+        <span>Description*:</span><br>
+        <textarea id="b_description" rows="5" cols="25" placeholder="***BUG** Please enter: (1) a consice description of the problem. (2) steps to reproduce bug. (3) the version of your browser and operating system."></textarea>
+      </label>
+
+      <label class="screenshot">
+        <span>Attach a screenshot (optional):</span>
+        <input type="file" id="b_screenshot" accept="image/*" placeholder="Attach a screenshot (optional)">
+      </label>
+
+      <p>
+        <input type="submit" id="bug-submit-button" value="Submit &rarr;"/>
+      </p>
+    </fieldset>
+  </form>
+</div>
+<img class="leftlogo" src="_static/OpenDSALogoT64.png" alt="Logo"/><div class="title-wrapper">
+          <div class="title-inbetween" style="display: table-cell; vertical-align: middle;">
+            <div class="title-content">
+              <h1 class="heading" ><a href="#">
+                <span>Tutorials</span></a></h1><h2 class="heading" ><span> Table Of Contents </span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="topnav">
+        <p>
+            <a style="float:left;color:blue;" href="../source/index.rst"
+              target="_blank" rel="nofollow">Show Source | </a>&#160;&#160;
+            <a class="abt" style="float:left;color:blue;" href="#" rel="nofollow">| About</a>&#160;&#160;
+
+          
+        <a  class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a  id="nextmod" href="cmdline.html">0.1. Command Line Basics</a>&#160;&#160;»
+
+
+        </p>
+      </div>
+       
+      <div class="content"><div class="sidebar" style="border-style:none;background-color:transparent">
+          <h3 style="margin-top:0em;">Search the book</h3>
+          <form class="search" action="search.html" method="get">
+            <input type="text" />
+            <input type="submit" value="Go" />
+            <input type="hidden" value="yes" />
+            <input type="hidden" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 60%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        
+  <script>ODSA.SETTINGS.DISP_MOD_COMP = false;ODSA.SETTINGS.MODULE_NAME = "index";ODSA.SETTINGS.MODULE_LONG_NAME = "Contents";ODSA.SETTINGS.MODULE_CHAPTER = ""; ODSA.SETTINGS.BUILD_DATE = "2015-01-29 15:41:21"; ODSA.SETTINGS.BUILD_CMAP = false;</script><div class="section" id="tutorials">
+<h1>Chapter 0&nbsp;&nbsp;&nbsp;Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cmdline.html">0.1. Command Line Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmdline.html#what-s-a-cli">0.1.1. What's A CLI?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cmdline.html#give-the-terminal-a-try">0.1.1.1. Give the terminal a try</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">0.2. Parsing Command Line Parameters In Your Progam</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html#parameters-in-programming">0.2.1. Parameters In Programming</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eclipseparameters.html">0.3. Using Parameters in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webcattools.html">0.4. Using/Installing VT Development Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="webcattools.html#installing-the-submission-plugin">0.4.1. Installing The Submission Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugmethods.html">0.5. Common Debugging Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugmethods.html#method-1-print-debugging">0.5.1. Method 1: Print Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugmethods.html#method-2-rubber-duck-debugging">0.5.2. Method 2: Rubber Duck Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugmethods.html#method-3-wolf-fence-debugging">0.5.3. Method 3: Wolf Fence Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugmethods.html#print-debugging-vs-source-debugging">0.5.4. Print Debugging vs Source Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">0.6. Debugging In Eclipse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#what-is-a-debugger">0.6.1. What Is A Debugger?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#debugging-terms">0.6.2. Debugging Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#debugging-a-memory-pool">0.6.3. Debugging A Memory Pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#the-eclipse-console">0.6.4. The Eclipse Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#conditional-breakpoints">0.6.5. Conditional Breakpoints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scanning.html">0.7. Reading In Input (From Files Or Otherwise)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scanning.html#the-scanner-class">0.7.1. The Scanner Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="randomaccessfile.html">0.8. Random Access Files In Java</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="randomaccessfile.html#understanding-file-i-o">0.8.1. Understanding File I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="randomaccessfile.html#using-randomaccessfile-class">0.8.2. Using RandomAccessFile Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="junitstart.html">0.9. JUnit Testing And You</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="junitstart.html#getting-started">0.9.1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="junitstart.html#design-considerations">0.9.2. Design Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="junitstart.html#meaningful-tests">0.9.3. Meaningful Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="junitstart.html#more-information">0.9.4. More Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="junitbasic.html">0.10. Writing JUnit Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="junitbasic.html#before-you-start">0.10.1. Before You Start</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="junitcoverage.html">0.11. Code Coverage In JUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="junitcoverage.html#getting-started">0.11.1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="junitcoverage.html#using-eclemma">0.11.2. Using EclEmma</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Gradebook.html">Gradebook</a></li>
+</ul>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      <p><span class="email_div" style="display:inline;"><a id="contact_us" class="contact" style="float:left;color:blue;" rel="nofollow" href="mailto:">Contact Us |</a><a style="float:left;color:blue;" rel="nofollow" href="../../../lib/Privacy.html" target="_blank">| Privacy |</a> <a style="float:left;color:blue;" rel="nofollow" href="../../../lib/license.html" target="_blank">| License</a></span>&#160;&#160;
+      
+        <a  class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a  id="nextmod1" href="cmdline.html">0.1. Command Line Basics</a>&#160;&#160;»
+
+</p>
+      </div>
+      <img style="float:right;" src="_static/nsf1.gif" height="62" width="62" alt="nsf"/>
+
+    <div class="footer">
+        &copy; Copyright 2013 by OpenDSA Project Contributors and distributed under an MIT license.
+      Last updated on Jan 29, 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

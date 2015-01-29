@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>0.8. Random Access Files In Java &mdash; Tutorials</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="../../../JSAV/css/JSAV.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/odsaMOD-min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="../../../lib/odsaStyle.css" type="text/css" />
+    
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": {
+        scale: "80"
+      }
+    });
+  </script>
+    <link rel="index" title="Tutorials" href="index.html" />
+    <link rel="next" title="9. JUnit Testing And You" href="junitstart.html" />
+    <link rel="prev" title="7. Reading In Input (From Files Or Otherwise)" href="scanning.html" /> 
+  </head>
+  <body>
+
+      <div class="header">
+        
+  
+      <script type="text/javascript" src="../../../lib/jquery.min.js"></script>
+      <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../JSAV/lib/jquery.transit.js"></script>
+    <script type="text/javascript" src="../../../JSAV/lib/raphael.js"></script>
+    <script type="text/javascript" src="../../../JSAV/build/JSAV-min.js"></script>
+    <script type="text/javascript" src="_static/config.js"></script>
+    <script type="text/javascript" src="../../../lib/odsaUtils-min.js"></script>
+    <script type="text/javascript" src="../../../lib/odsaMOD-min.js"></script>
+    <script type="text/javascript" src="../../../lib/conceptMap.js"></script>
+
+        
+<a id="username-link" style="float:right;color:red;margin:10px 20px auto; display: none" class="username-link" href="Gradebook.html"></a>
+<a id="login-link" style="float:right;color:red;margin:10px 20px auto" class="login-link" href="#"><Macro 'login'></a>
+<div id="login-box" class="login-popup">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+  <form method="post" class="signin" action="https://#">
+    <fieldset class="textbox">
+      <label class="username">
+        <span>Username</span>
+        <input id="username" value="" type="text" autocomplete="on" placeholder="Username" tabindex="1">
+      </label>
+      <label class="password">
+        <span>Password</span>
+        <input id="password" value="" type="password" placeholder="Password" tabindex="2">
+        <span><a id="forgot" href="#">Forgot your password?</a></span>
+      </label>
+
+      <p>
+        <input type="submit" id="login-submit-button" value="Sign in" tabindex="3" />
+      </p>
+      <p>
+        <input type="button" id="register-button" value="Register" tabindex="4" />
+      </p>
+    </fieldset>
+  </form>
+</div>
+
+        
+<a id="registration-link" style="float:right;color:red;margin:10px 20px auto" class="registration-link" href="#">Register</a>
+<div id="registration-box" class="registration-popup ">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close Window" /></a>
+  <form method="post" class="signin" action="https://#">
+    <fieldset class="textbox">
+      <div id="register_error" class="error"></div>
+      <label class="username">
+        <span>Username:</span>
+        <input type="text" id="user" placeholder="Username" />
+      </label>
+
+      <label class="password">
+        <span>Password</span>
+        <input id="pass" type="password" placeholder="Password" />
+      </label>
+
+      <label class="password">
+        <span>Confirm Password</span>
+        <input id="rpass" type="password" placeholder="Confirm Password" />
+      </label>
+
+      <label class="email">
+        <span>Email:</span>
+        <input type="text" id="email" placeholder="Email">
+      </label>
+
+      <p>
+        <input type="submit" id="register-submit-button" value="Register &rarr;"/>
+      </p>
+    </fieldset>
+  </form>
+</div>
+
+        
+<a id="bugreport-link" style="float:right;color:red;margin:10px 20px auto" class="bugreport-link" href="#">Report a bug</a>
+<div id="bugreport-box" class="bugreport-popup ">
+  <a href="#" class="close"><img src="_static/Images/close_pop.png" class="btn_close" title="Close Window" alt="Close Window" /></a>
+  <form method="post" class="report" action="https://#">
+    <fieldset class="textbox">
+      <div id="bug_error" class="error"></div>
+      <label>
+        <span>Summary*:</span>
+        <input type="text" id="b_title" placeholder="Summary" />
+      </label>
+
+      <label class="os">
+        <span>Operating system*:</span>
+        <select id="b_os">
+          <option value="windows">Windows</option>
+          <option value="macos">Mac OS</option>
+          <option value="linux">Linux</option>
+          <option value="ios">iOS</option>
+          <option value="android">Android</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label class="browser">
+        <span>Browser*:</span>
+        <select id="b_browser">
+          <option value="chrome">Chrome</option>
+          <option value="safari">Safari</option>
+          <option value="internetexplorer">Internet Explorer</option>
+          <option value="opera">Opera</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label class="description">
+        <span>Description*:</span><br>
+        <textarea id="b_description" rows="5" cols="25" placeholder="***BUG** Please enter: (1) a consice description of the problem. (2) steps to reproduce bug. (3) the version of your browser and operating system."></textarea>
+      </label>
+
+      <label class="screenshot">
+        <span>Attach a screenshot (optional):</span>
+        <input type="file" id="b_screenshot" accept="image/*" placeholder="Attach a screenshot (optional)">
+      </label>
+
+      <p>
+        <input type="submit" id="bug-submit-button" value="Submit &rarr;"/>
+      </p>
+    </fieldset>
+  </form>
+</div>
+<img class="leftlogo" src="_static/OpenDSALogoT64.png" alt="Logo"/><div class="title-wrapper">
+          <div class="title-inbetween" style="display: table-cell; vertical-align: middle;">
+            <div class="title-content">
+              <h1 class="heading" ><a href="index.html">
+                <span>Tutorials</span></a></h1>
+              <h2 class="heading" ><span>Chapter 0 Tutorials</span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="topnav">
+        <p>
+            <a style="float:left;color:blue;" href="../source/randomaccessfile.rst"
+              target="_blank" rel="nofollow">Show Source | </a>&#160;&#160;
+            <a class="abt" style="float:left;color:blue;" href="#" rel="nofollow">| About</a>&#160;&#160;
+
+          
+        «&#160;&#160;<a id="prevmod" href="scanning.html">0.7. Reading In Input (From Files Or Otherwise)</a>
+        &#160;&#160;::&#160;&#160;
+        <a  class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a  id="nextmod" href="junitstart.html">0.9. JUnit Testing And You</a>&#160;&#160;»
+
+
+        </p>
+      </div>
+       
+      <div class="content">
+        
+  <script>ODSA.SETTINGS.DISP_MOD_COMP = false;ODSA.SETTINGS.MODULE_NAME = "randomaccessfile";ODSA.SETTINGS.MODULE_LONG_NAME = "Using the Java RandomAccessFile class";ODSA.SETTINGS.MODULE_CHAPTER = "Tutorials"; ODSA.SETTINGS.BUILD_DATE = "2015-01-29 15:41:21"; ODSA.SETTINGS.BUILD_CMAP = false;JSAV_OPTIONS['lang']='en';JSAV_EXERCISE_OPTIONS['code']='processing';</script><div class="section" id="random-access-files-in-java">
+<h1>0.8. Random Access Files In Java<a class="headerlink" href="#random-access-files-in-java" title="Permalink to this headline">¶</a></h1>
+<p>In earlier tutorials we saw how we can use Java's scanner class to read sequential
+text files. Scanners are great for reading files, but we can take a
+step farther out and conceptualize our data even more abstractly, instead of
+reading in files as strings we can instead read the raw bytes and then write
+those bytes to the file. By doing this we have no limits on the types of data
+we can store. Additionally, RandomAccessFiles, allow reading and writing anywhere
+withing the file, jumping to any legal location within the file itself.
+Before reading this tutorial be sure to check the RandomAccessFile API found
+<a class="reference external" href="https://docs.oracle.com/javase/7/docs/api/java/io/RandomAccessFile.html">here</a>.</p>
+<div class="section" id="understanding-file-i-o">
+<h2>0.8.1. Understanding File I/O<a class="headerlink" href="#understanding-file-i-o" title="Permalink to this headline">¶</a></h2>
+<p>Before getting started using the RandomAccessFile class, be sure you understand
+the following concepts.</p>
+<p>1) Reading - Read a chunk of data (bytes) at a location on disk. These bytes
+can be located anywhere within the file.</p>
+<p>2) Writing - Write a chunk of data (bytes) at a location on disk. We can &quot;write&quot;
+anywhere within the file.</p>
+<p>3) File Pointer - A number representing the byte position we are at in the file.
+We can manipulate the File Pointer to point anywhere within our file. A
+RandomAccessFile should be trated similar to an array of bytes. It's index will
+start at 0 and it's last position will be one less than the total size of the
+file.</p>
+<p>One very important thing to note about the RandomAccessFile class. It is very
+easy to seek past the end of the file and write to that location (as the RandomAccessFile
+class assumes that one might wish to grow a file), however, if the file pointer is
+moved past the end of file and written to at that location, if the user tries to
+read it may encounter the EndOfFile or EOF at the old size and as such will throw
+an error.</p>
+</div>
+<div class="section" id="using-randomaccessfile-class">
+<h2>0.8.2. Using RandomAccessFile Class<a class="headerlink" href="#using-randomaccessfile-class" title="Permalink to this headline">¶</a></h2>
+<p>Consider the code example below. It will generate a file of a size 0 to 999
+bytes and it will then fill those bytes in order with numbers from 65 to 90
+(randomly chosen). The program will output a plaintext file randomly filled with
+capital English alphabet letters. Why does this work? Remember that to a computer
+data is nothing but a collection of bits. For ASCII text we have a set of
+characters whose numeric values range from 0 to 255 (or the maximum value of one
+byte). The capital letters in ASCII range from values 65 to 90, thus when I
+write a value of 65-90 to a file it will be interpreted as a letter.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">RandomAccessFile</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Random</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="n">class</span> <span class="n">Main</span> <span class="p">{</span>
+
+   <span class="n">public</span> <span class="k">static</span> <span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">try</span> <span class="p">{</span>
+         <span class="n">RandomAccessFile</span> <span class="n">raf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RandomAccessFile</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;rw&quot;</span><span class="p">);</span><span class="c1">//Open our file with read/write access</span>
+         <span class="n">Random</span> <span class="n">rdn</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Random</span><span class="p">();</span><span class="c1">//Get a new random generator</span>
+         <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">999</span><span class="p">;</span><span class="c1">//Our file will have a maximum size of 999 bytes</span>
+         <span class="kt">int</span> <span class="n">amin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kt">int</span> <span class="n">amax</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span><span class="c1">//The alphabet has 26 letters thus we want to generate a random offset</span>
+         <span class="c1">//to &quot;pick&quot; those letters</span>
+         <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">rdn</span><span class="p">.</span><span class="n">nextInt</span><span class="p">(</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">min</span><span class="p">;</span><span class="c1">//Get the length of our file</span>
+         <span class="n">raf</span><span class="p">.</span><span class="n">setLength</span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">length</span><span class="p">);</span><span class="c1">//Set the length or size of the file, note that the we do not have to</span>
+         <span class="c1">//set length of the file as the write method will &quot;grow&quot; the file with each sequential write</span>
+         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//Run until our file is full</span>
+            <span class="kt">int</span> <span class="n">chr</span> <span class="o">=</span> <span class="n">rdn</span><span class="p">.</span><span class="n">nextInt</span><span class="p">(</span><span class="n">amax</span> <span class="o">-</span> <span class="n">amin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">amin</span><span class="p">;</span><span class="c1">//Randomly get our offset</span>
+            <span class="n">chr</span> <span class="o">+=</span> <span class="mi">65</span><span class="p">;</span><span class="c1">//ASCII capital letters range from 65-90, so add 65 to whatever we got</span>
+            <span class="n">raf</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">chr</span><span class="p">);</span><span class="c1">//Write the int to the file</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Writing %c at %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">chr</span><span class="p">,</span> <span class="n">raf</span><span class="p">.</span><span class="n">getFilePointer</span><span class="p">());</span><span class="c1">//Ouput our char and where</span>
+            <span class="c1">//we wrote it.</span>
+         <span class="p">}</span>
+         <span class="n">raf</span><span class="p">.</span><span class="n">close</span><span class="p">();</span><span class="c1">//Close our filestream.</span>
+      <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>       
+         <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+      <span class="p">}</span> 
+   <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So we have generated a file and filled it with bytes that are randomly created.
+How do we read the file? The RandomAccessFile class has a number of read
+functions. The following example demos a few below. The example starts by reading
+in the entire file (generated from above) and outputing the contents to the
+terminal. The program then randomly generates a new position in the file and
+sets our file pointer to there, outputing the position, the int value of the
+byte, and the character it represents. Finally the program creates a new byte
+array the size of the file and attempts to read that many bytes, using the read
+method. As the comments explain, the read method returns an int representing
+how many bytes were actually read. After reading in the array, the program then
+outputs the position read started at, the amount of bytes read and the size of
+the array given to read. Running this program on my machine (after generating
+a file from the above code), produced the following output.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="n">EXUHIULUQKLZICYUQIKMWZCQPXKYBEHKCJVUIBCIYHKJPCPENWXJLZEMDHVLPNBXDOTNVZIUYNMQTLZVTITTVMMLDWJTMEHSUZUBTSEQPATLOQRUOODL</span>
+<span class="n">Set</span> <span class="n">pos</span> <span class="n">to</span> <span class="mi">111</span><span class="p">,</span> <span class="n">value</span> <span class="mi">85</span><span class="p">,</span> <span class="n">character</span> <span class="n">U</span>
+<span class="n">Tried</span> <span class="n">reading</span> <span class="n">at</span> <span class="n">position</span> <span class="mi">112</span><span class="p">,</span> <span class="n">read</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">array</span> <span class="n">was</span> <span class="n">size</span> <span class="mi">116</span>
+</pre></div>
+</div>
+<div class="highlight-guess"><div class="highlight"><pre><span class="kr">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">RandomAccessFile</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Random</span><span class="p">;</span>
+
+<span class="kr">public</span> <span class="kr">class</span> <span class="nx">Main</span> <span class="p">{</span>
+
+   <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">main</span><span class="p">(</span><span class="nb">String</span><span class="cp">[]</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+         <span class="nx">RandomAccessFile</span> <span class="nx">raf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RandomAccessFile</span><span class="p">(</span><span class="nx">args</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">,</span> <span class="s2">&quot;rw&quot;</span><span class="p">);</span><span class="c1">//Open our file with read/write access</span>
+         <span class="nx">Random</span> <span class="nx">rdn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Random</span><span class="p">();</span>
+         <span class="kr">int</span> <span class="nx">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kr">int</span> <span class="nx">max</span> <span class="o">=</span> <span class="p">(</span><span class="kr">int</span><span class="p">)</span><span class="nx">raf</span><span class="p">.</span><span class="nx">length</span><span class="p">();</span>
+         <span class="kr">int</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">rdn</span><span class="p">.</span><span class="nx">nextInt</span><span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>        
+         <span class="kr">byte</span><span class="cp">[]</span> <span class="nx">file</span> <span class="o">=</span> <span class="k">new</span> <span class="kr">byte</span><span class="cp">[</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">raf.length</span><span class="p">()</span><span class="cp">]</span><span class="p">;</span><span class="c1">//create an array to hold our file</span>
+         <span class="nx">raf</span><span class="p">.</span><span class="nx">readFully</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span><span class="c1">//Read from our RAF up to the length of our array</span>
+         <span class="nb">String</span> <span class="nx">str</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span><span class="c1">//Convert the bytes representing our file to text</span>
+         <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span><span class="c1">//Print out our file size</span>
+         <span class="nx">raf</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">pos</span><span class="p">);</span><span class="c1">//Set our position randomly in the file</span>
+         <span class="kr">byte</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">raf</span><span class="p">.</span><span class="nx">readByte</span><span class="p">();</span><span class="c1">//Read the byte at our current spot</span>
+         <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;Set pos to %d, value %d, character %c\n&quot;</span><span class="p">,</span> <span class="nx">pos</span><span class="p">,</span> <span class="p">(</span><span class="kr">int</span><span class="p">)</span><span class="nx">b</span><span class="p">,</span> <span class="p">(</span><span class="kr">char</span><span class="p">)</span><span class="nx">b</span><span class="p">);</span>
+         <span class="nx">file</span> <span class="o">=</span> <span class="k">new</span> <span class="kr">byte</span><span class="cp">[</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">raf.length</span><span class="p">()</span><span class="cp">]</span><span class="p">;</span><span class="c1">//Create a new array the size of the file</span>
+         <span class="nx">pos</span> <span class="o">=</span> <span class="p">(</span><span class="kr">int</span><span class="p">)</span><span class="nx">raf</span><span class="p">.</span><span class="nx">getFilePointer</span><span class="p">();</span><span class="c1">//Get the current position in the file</span>
+         <span class="kr">int</span> <span class="nx">read</span> <span class="o">=</span> <span class="nx">raf</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span><span class="c1">//Use the read function. The read function requires you</span>
+         <span class="c1">//provide a byte array, the offset from the current position you want to start and the amount of</span>
+         <span class="c1">//bytes you would like. This is largely based off a c function as traditionally when you pass an</span>
+         <span class="c1">//array you have no idea what the size of the array is. In most cases you will simply want to </span>
+         <span class="c1">//provide the length of the array you are passing in. Note that this function returns an int.</span>
+         <span class="c1">//This int represents the bytes read from the file.</span>
+         <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;Tried reading at position %d, read %d bytes, array was size %d\n&quot;</span><span class="p">,</span> <span class="nx">pos</span><span class="p">,</span> <span class="nx">read</span><span class="p">,</span> 
+               <span class="nx">file</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+         <span class="nx">raf</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span><span class="c1">//Close our filestream.</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>       
+         <span class="nx">e</span><span class="p">.</span><span class="nx">printStackTrace</span><span class="p">();</span>
+      <span class="p">}</span> 
+   <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There you go, reading and writing using bytes!</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      <p><span class="email_div" style="display:inline;"><a id="contact_us" class="contact" style="float:left;color:blue;" rel="nofollow" href="mailto:">Contact Us |</a><a style="float:left;color:blue;" rel="nofollow" href="../../../lib/Privacy.html" target="_blank">| Privacy |</a> <a style="float:left;color:blue;" rel="nofollow" href="../../../lib/license.html" target="_blank">| License</a></span>&#160;&#160;
+      
+        «&#160;&#160;<a id="prevmod1" href="scanning.html">0.7. Reading In Input (From Files Or Otherwise)</a>
+        &#160;&#160;::&#160;&#160;
+        <a  class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a  id="nextmod1" href="junitstart.html">0.9. JUnit Testing And You</a>&#160;&#160;»
+
+</p>
+      </div>
+      <img style="float:right;" src="_static/nsf1.gif" height="62" width="62" alt="nsf"/>
+
+    <div class="footer">
+        &copy; Copyright 2013 by OpenDSA Project Contributors and distributed under an MIT license.
+      Last updated on Jan 29, 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
